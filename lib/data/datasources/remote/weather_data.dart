@@ -13,7 +13,7 @@ class WeatherData{
   Future<WeatherModel>getWeatherData(String city) async{
       final response= await http.get(Uri.parse('$url?q=$city&appid=$apiKey&units=metric'));
       if(response.statusCode==200){
-        return WeatherData.fromJson(jsonDecode(response.body));
+        return WeatherModel.fromJson(jsonDecode(response.body));
       }else{
         throw Exception('Failed to get weather data');
       }
