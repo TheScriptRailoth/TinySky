@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_,child){
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: GoogleFonts.roboto().fontFamily,
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

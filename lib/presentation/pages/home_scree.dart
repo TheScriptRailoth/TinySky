@@ -13,6 +13,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isNightTime=DateTime.now().hour<6 || DateTime.now().hour>18;
+  Color dayColor1 = Color(0xff91DEFF);
+  Color dayColor2 = Color(0xff47BBE1);
+  Color nightColor1 = Colors.blueGrey.shade800;
+  Color nightColor2 = Colors.black87;
 
   String monthName(int num){
     List<String> abbreviatedMonths = [
@@ -47,18 +52,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    List<Color> colors = isNightTime ? [nightColor1, nightColor2] : [dayColor1, dayColor2];
+
     return Scaffold(
       backgroundColor: Color(0xff91DEFF),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [
-                // Color(0xff254659),
-                // Colors.white,
-                Color(0xff91DEFF),
-                Color(0xff47BBE1),
-                // Colors.white
-              ],
+            colors: colors,
+              // colors: [
+              //   // Color(0xff254659),
+              //   // Colors.white,
+              //   Color(0xff91DEFF),
+              //   Color(0xff47BBE1),
+              //   // Colors.white
+              // ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           )
