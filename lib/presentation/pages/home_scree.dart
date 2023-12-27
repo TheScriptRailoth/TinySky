@@ -6,7 +6,8 @@ import 'package:lottie/lottie.dart';
 import 'package:tiny_sky/data/datasources/remote/weather_data.dart';
 import 'package:tiny_sky/data/models/weather_model.dart';
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final WeatherModel? weatherModel;
+  const HomeScreen({Key? key, this.weatherModel}):super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -84,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _fetchWeather();
+    _weatherModel=widget.weatherModel;
   }
   @override
   Widget build(BuildContext context) {
