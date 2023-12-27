@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:tiny_sky/data/datasources/remote/weather_data.dart';
+import 'package:tiny_sky/data/models/hourly_widget_model.dart';
 import 'package:tiny_sky/data/models/weather_model.dart';
 class HomeScreen extends StatefulWidget {
   final WeatherModel? weatherModel;
-  const HomeScreen({Key? key, this.weatherModel}):super(key: key);
+  final HourlyWidgetModel? hourlyWeatherModel;
+  const HomeScreen({Key? key, this.weatherModel, this.hourlyWeatherModel}):super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -28,22 +29,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return abbreviatedMonths[num-1];
   }
 
-  final _weatherData = WeatherData('672dd5784d1ee2fff09d6767c38498c7');
   WeatherModel? _weatherModel;
+  HourlyWidgetModel? _hourlyWidgetModel;
 
-  _fetchWeather() async{
-    String cityName = await _weatherData.currentCity();
-
-    try{
-      final weather=await _weatherData.getWeatherData(cityName);
-      setState(() {
-          _weatherModel=weather;
-      });
-    }
-    catch (e){
-      print(e);
-    }
-  }
   String ClimateAnimation() {
     String? currentCondition = _weatherModel?.condition.toString().toLowerCase();
 
@@ -72,20 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return 'assets/animations/$defaultAnimation.json';
   }
 
-  // String ClimateAnimation(){
-  //   String? currentCondition=_weatherModel?.condition.toString().toLowerCase();
-  //   if(currentCondition=='clouds' && isNightTime==true || currentCondition=='mist' && isNightTime==true ||currentCondition=='smoke' && isNightTime==true || currentCondition=='haze' && isNightTime==true || currentCondition=='dust' && isNightTime==true || currentCondition=='fog' && isNightTime==true)
-  //     return 'assets/animations/night_clouds.json';
-  //   else if(currentCondition=='cloud' && isNightTime==false || currentCondition=='mist' && isNightTime==false ||currentCondition=='smoke' && isNightTime==false || currentCondition=='haze' && isNightTime==false || currentCondition=='dust' && isNightTime==false || currentCondition=='fog' && isNightTime==false)
-  //     return 'assets/animations/clouds.json';
-  //   return 'assets/animations/sunny.json';
-  // }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _weatherModel=widget.weatherModel;
+    _hourlyWidgetModel=widget.hourlyWeatherModel;
   }
   @override
   Widget build(BuildContext context) {
