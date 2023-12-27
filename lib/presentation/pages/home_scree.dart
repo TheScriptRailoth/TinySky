@@ -63,7 +63,85 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            Container(child: Lottie.asset('assets/animations/clouds.json')),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    height: 187.h,
+                    width: 284.w,
+                    child: Lottie.asset('assets/animations/clouds.json')
+                ),
+                Text("${_weatherModel?.temperature.round()}\u00B0C", style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 64.sp
+                ),),
+                Text("Precipitation", style: TextStyle(color: Colors.white, fontSize: 14.sp),),
+                Text("Max: 34 Min: 28", style: TextStyle(color: Colors.white, fontSize: 14.sp),),
+                SizedBox(height: 20.h,),
+                Container(
+                  height: 47.h,
+                  width: MediaQuery.sizeOf(context).width-40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.r),
+                    color: Color(0xff104084).withOpacity(0.3),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(CupertinoIcons.drop_fill, color: Colors.white, size: 18,),
+                          Text("18%", style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16
+                          ),)
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Icon(CupertinoIcons.thermometer, color: Colors.white, size: 18,),
+                          Text("67%", style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16
+                          ),)
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Icon(CupertinoIcons.wind, color: Colors.white, size: 18,),
+                          Text("24 km/h", style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18
+                          ),)
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20.h,),
+                Container(
+                  height: 217.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.r),
+                    color: Color(0xff104084).withOpacity(0.3),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text("Today", style: TextStyle(color: CupertinoDynamicColor.withBrightness(color: color, darkColor: darkColor)),)
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),
