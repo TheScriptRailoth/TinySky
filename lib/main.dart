@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: GoogleFonts.roboto().fontFamily,
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff254659)),
               useMaterial3: true,
             ),
             home: HomeScreen()

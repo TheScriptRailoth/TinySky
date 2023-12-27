@@ -54,6 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     List<Color> colors = isNightTime ? [nightColor1, nightColor2] : [dayColor1, dayColor2];
 
+    if (_weatherModel == null) {
+      return Center(child: CircularProgressIndicator()); // Show a loading indicator
+    }
+
     return Scaffold(
       backgroundColor: Color(0xff91DEFF),
       body: Container(
@@ -108,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 64.sp
                   ),),
                   Text("Precipitation", style: TextStyle(color: Colors.white, fontSize: 14.sp),),
-                  Text("Max: 34 Min: 28", style: TextStyle(color: Colors.white, fontSize: 14.sp),),
+                  Text("Max: ${_weatherModel?.maxTemp.toString()??"__"}"+"  Min: ${_weatherModel?.minTemp.toString()??"__"}", style: TextStyle(color: Colors.white, fontSize: 14.sp),),
                   SizedBox(height: 20.h,),
                   Container(
                     height: 47.h,
@@ -123,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: [
                             Icon(CupertinoIcons.drop_fill, color: Colors.white, size: 18,),
-                            Text("18%", style: TextStyle(
+                            SizedBox(width: 5.w,),
+                            Text(_weatherModel!.humidity.toString()??"__", style: TextStyle(
                               color: Colors.white,
                               fontSize: 16
                             ),)
@@ -141,7 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: [
                             Icon(CupertinoIcons.wind, color: Colors.white, size: 18,),
-                            Text("20 km/h", style: TextStyle(
+                            SizedBox(width: 5.w),
+                            Text("${_weatherModel?.windSpeed.round().toString()??"__"}km/h", style: TextStyle(
                               color: Colors.white,
                               fontSize: 18
                             ),)
