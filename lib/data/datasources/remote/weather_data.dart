@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import '../../models/weather_model.dart';
 import 'package:http/http.dart' as http;
 class WeatherData{
-  static const url="https://api.openweathermap.org/data/3.0/weather";
+  static const url="https://api.openweathermap.org/data/2.5/weather";
   final String apiKey;
 
   WeatherData(this.apiKey);
