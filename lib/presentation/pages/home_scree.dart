@@ -43,6 +43,42 @@ class _HomeScreenState extends State<HomeScreen> {
       print(e);
     }
   }
+  String ClimateAnimation() {
+    String? currentCondition = _weatherModel?.condition.toString().toLowerCase();
+
+    final Map<String, String> animations = {
+      'clouds': 'clouds',
+      'mist': 'clouds',
+      'smoke': 'clouds',
+      'haze': 'clouds',
+      'dust': 'clouds',
+      'fog': 'clouds',
+      'cloud': 'night_cloud',
+    };
+
+    String defaultAnimation = 'sunny';
+
+    if (currentCondition != null) {
+      String animationKey = animations[currentCondition] ?? defaultAnimation;
+
+      if (isNightTime && !animationKey.contains('night')) {
+        animationKey = 'night_$animationKey';
+      }
+
+      return 'assets/animations/$animationKey.json';
+    }
+
+    return 'assets/animations/$defaultAnimation.json';
+  }
+
+  // String ClimateAnimation(){
+  //   String? currentCondition=_weatherModel?.condition.toString().toLowerCase();
+  //   if(currentCondition=='clouds' && isNightTime==true || currentCondition=='mist' && isNightTime==true ||currentCondition=='smoke' && isNightTime==true || currentCondition=='haze' && isNightTime==true || currentCondition=='dust' && isNightTime==true || currentCondition=='fog' && isNightTime==true)
+  //     return 'assets/animations/night_clouds.json';
+  //   else if(currentCondition=='cloud' && isNightTime==false || currentCondition=='mist' && isNightTime==false ||currentCondition=='smoke' && isNightTime==false || currentCondition=='haze' && isNightTime==false || currentCondition=='dust' && isNightTime==false || currentCondition=='fog' && isNightTime==false)
+  //     return 'assets/animations/clouds.json';
+  //   return 'assets/animations/sunny.json';
+  // }
 
   @override
   void initState() {
@@ -55,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Color> colors = isNightTime ? [nightColor1, nightColor2] : [dayColor1, dayColor2];
 
     if (_weatherModel == null) {
-      return Center(child: CircularProgressIndicator()); // Show a loading indicator
+      return Center(child: CircularProgressIndicator());
     }
 
     return Scaffold(
@@ -104,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                       height: 187.h,
                       width: 284.w,
-                      child: Lottie.asset('assets/animations/clouds.json')
+                      child: Lottie.asset(ClimateAnimation())
                   ),
                   Text("${_weatherModel?.temperature.round()}\u00B0C", style: TextStyle(
                       fontWeight: FontWeight.bold,
