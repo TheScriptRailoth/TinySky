@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: [
                             Icon(CupertinoIcons.wind, color: Colors.white, size: 18,),
-                            Text("24 km/h", style: TextStyle(
+                            Text("20 km/h", style: TextStyle(
                               color: Colors.white,
                               fontSize: 18
                             ),)
