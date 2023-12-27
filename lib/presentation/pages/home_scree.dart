@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       fontSize: 64.sp
                   ),),
-                  Text("Precipitation", style: TextStyle(color: Colors.white, fontSize: 14.sp),),
+                  Text("Feels Like ${_weatherModel?.feelsLike.toString()??"__"}\u00B0C", style: TextStyle(color: Colors.white, fontSize: 14.sp),),
                   Text("Max: ${_weatherModel?.maxTemp.toString()??"__"}"+"  Min: ${_weatherModel?.minTemp.toString()??"__"}", style: TextStyle(color: Colors.white, fontSize: 14.sp),),
                   SizedBox(height: 20.h,),
                   Container(
@@ -126,9 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Row(
                           children: [
-                            Icon(CupertinoIcons.drop_fill, color: Colors.white, size: 18,),
+                            Icon(Icons.water_rounded, color: Colors.white, size: 18,),
                             SizedBox(width: 5.w,),
-                            Text(_weatherModel!.humidity.toString()??"__", style: TextStyle(
+                            Text((_weatherModel!.humidity.round().toString()??"__")+"%", style: TextStyle(
                               color: Colors.white,
                               fontSize: 16
                             ),)
@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: [
                             Icon(CupertinoIcons.thermometer, color: Colors.white, size: 18,),
-                            Text("67%", style: TextStyle(
+                            Text("${_weatherModel?.feelsLike.round().toString()??"__"}\u00B0C", style: TextStyle(
                               color: Colors.white,
                               fontSize: 16
                             ),)
