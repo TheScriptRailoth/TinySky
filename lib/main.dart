@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiny_sky/presentation/pages/home_scree.dart';
+import 'package:tiny_sky/presentation/pages/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff254659)),
               useMaterial3: true,
             ),
-            home: HomeScreen()
+            home: SplashScreen()
         );
       },
     );
