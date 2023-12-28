@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tiny_sky/data/datasources/remote/hourly_widget_data.dart';
 import 'package:tiny_sky/data/models/hourly_widget_model.dart';
 import 'package:tiny_sky/data/models/weather_model.dart';
 class HomeScreen extends StatefulWidget {
@@ -194,73 +195,50 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),)
                             ],
                           ),
-                          SizedBox(height: 10.h,),
-                          SingleChildScrollView(
-                            scrollDirection:Axis.horizontal,
-                            child: Row(
-                              children: [
-                                SizedBox(width: 5.w,),
-                                Container(
-                                  height: 140.h,
-                                  width: 70.w,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20.r),
-                                    border: Border.all(color: Colors.lightBlueAccent)
-                                  ),
-                                  child: TextButton(
-                                      onPressed: (){},
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text("30\u00B0C", style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18.sp
-                                          ),),
-                                          Container(
-                                              height: 43.h,
-                                              width: 43.w,
-                                              child: Lottie.asset('assets/animations/light_rain.json'),
-                                          ),
-                                          Text("17:00", style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18.sp
-                                          ),),
-                                        ],
-                                      )
-                                  ),
-                                ),
-                                SizedBox(width: 5.w,),
-                                Container(
-                                  height: 140.h,
-                                  width: 70.w,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.r),
-                                      border: Border.all(color: Colors.lightBlueAccent)
-                                  ),
-                                  child: TextButton(
-                                      onPressed: (){},
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text("30\u00B0C", style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18.sp
-                                          ),),
-                                          Container(
-                                            height: 43.h,
-                                            width: 43.w,
-                                            child: Lottie.asset('assets/animations/light_rain.json'),
-                                          ),
-                                          Text("17:00", style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18.sp
-                                          ),),
-                                        ],
-                                      )
-                                  ),
-                                ),
-                                SizedBox(width: 5.w,),
-                              ],
+                          Container(
+                            height: double.infinity,
+                            width: double.infinity,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 5,
+                              itemBuilder: (BuildContext context, int index) {
+                                return  Row(
+                                  children: [
+                                    SizedBox(width: 5.w,),
+                                    Container(
+                                      height: 140.h,
+                                      width: 70.w,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20.r),
+                                          border: Border.all(color: Colors.lightBlueAccent)
+                                      ),
+                                      child: TextButton(
+                                          onPressed: (){},
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text('${_hourlyWidgetModel!.temperature[index].round().toString()}\u00B0C'??"__", style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18.sp
+                                              ),),
+                                              Container(
+                                                height: 43.h,
+                                                width: 43.w,
+                                                child: Lottie.asset('assets/animations/light_rain.json'),
+                                              ),
+                                              Text("17:00", style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18.sp
+                                              ),),
+                                            ],
+                                          )
+                                      ),
+                                    ),
+                                    SizedBox(width: 5.w,),
+                                  ],
+                                );
+                              },
+
                             ),
                           )
                         ],

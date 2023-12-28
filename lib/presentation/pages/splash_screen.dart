@@ -143,7 +143,7 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       String cityName = await _weatherData.currentCity();
       final weather = await _weatherData.getWeatherData(cityName);
-      final hourlyWeather = await _hourlyWidgetData.getHourlyData(cityName);
+      final hourlyWeather = await _hourlyWidgetData.getHourlyData();
 
       setState(() {
         _weatherModel = weather;

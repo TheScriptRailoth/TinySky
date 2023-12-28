@@ -7,11 +7,11 @@ class HourlyWidgetData{
   final String apiKey;
 
   HourlyWidgetData(this.apiKey);
-  Future<HourlyWidgetModel>getHourlyData(String city) async{
+  Future<HourlyWidgetModel>getHourlyData() async{
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     final response2= await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/forecast?lat=${position.latitude}&lon=${position.longitude}&exclude=hourly&appid=$apiKey&units=metric'));
     if(response2.statusCode==200){
-      print(response2.body);
+      print("Respose 2: ${response2.body}");
       return HourlyWidgetModel.fromJson(jsonDecode(response2.body));
     }else{
       throw Exception('Failed to get weather data');
