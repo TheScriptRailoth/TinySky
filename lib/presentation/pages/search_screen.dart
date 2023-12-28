@@ -54,9 +54,41 @@ class _SearchScreenState extends State<SearchScreen> {
                    ],
                  ),
                ),
-             )
+             ),
+             SizedBox(height: 10.h,),
+             LocationListTile('Jhansi')
            ],
         ),
+      ),
+    );
+  }
+
+  Widget LocationListTile(String location){
+    return Container(
+      height: 40.h,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.symmetric(horizontal: BorderSide(color: Colors.grey, width: 0.5))
+      ),
+      child: TextButton(
+          onPressed: (){},
+          child: Row(
+            children: [
+              Container(
+                width: 40.w,
+                height: 30.h,
+                child: Icon(CupertinoIcons.location_circle, color: Colors.grey,),
+              ),
+              Expanded(
+                  child: Text(location, style: TextStyle(color: Colors.grey, fontSize: 16.sp), overflow: TextOverflow.ellipsis,),
+              ),
+              Container(
+                width: 40.w,
+                height: 30.h,
+                child: Icon(CupertinoIcons.arrow_up_left, color: Colors.grey,),
+              ),
+            ],
+          )
       ),
     );
   }
