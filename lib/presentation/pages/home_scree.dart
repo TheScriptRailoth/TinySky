@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:tiny_sky/data/datasources/remote/hourly_widget_data.dart';
 import 'package:tiny_sky/data/models/hourly_widget_model.dart';
 import 'package:tiny_sky/data/models/weather_model.dart';
+import 'package:tiny_sky/presentation/pages/search_screen.dart';
 class HomeScreen extends StatefulWidget {
   final WeatherModel? weatherModel;
   final HourlyWidgetModel? hourlyWeatherModel;
@@ -114,11 +115,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Icon(Icons.location_on_outlined, size: 27, color: Colors.white,),
                       SizedBox(width: 5.w,),
-                      Text(_weatherModel?.city??"Loading City...", style: GoogleFonts.roboto(
-                        fontSize: 18.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                      ), ),
+                      TextButton(
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return SearchScreen();
+                          }));
+                        },
+                        child: Text(_weatherModel?.city??"Loading City...", style: GoogleFonts.roboto(
+                          fontSize: 18.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                        ), ),
+                      ),
                       SizedBox(width: 5.w,),
                       Icon(Icons.arrow_drop_down_rounded, color: Colors.white,size: 24.h,)
                     ],
