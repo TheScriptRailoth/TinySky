@@ -33,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
   WeatherModel? _weatherModel;
   HourlyWidgetModel? _hourlyWidgetModel;
 
-  String ClimateAnimation() {
-    String? currentCondition = _weatherModel?.condition.toString().toLowerCase();
+  String ClimateAnimation(String currentCondtion) {
+    String? currentCondition = currentCondtion.toLowerCase();
 
     final Map<String, String> animations = {
       'clouds': 'clouds',
@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                       height: 187.h,
                       width: 284.w,
-                      child: Lottie.asset(ClimateAnimation())
+                      child: Lottie.asset(ClimateAnimation(_weatherModel!.condition))
                   ),
                   Text("${_weatherModel?.temperature.round()}\u00B0C", style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -195,50 +195,50 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),)
                             ],
                           ),
+                          SizedBox(height: 15.h,),
                           Container(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: ListView.builder(
+                            height: 140.h,
+                            child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
-                              itemCount: 5,
-                              itemBuilder: (BuildContext context, int index) {
-                                return  Row(
-                                  children: [
-                                    SizedBox(width: 5.w,),
-                                    Container(
+                              child: Row(
+                                children: List.generate(20, (index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: Container(
                                       height: 140.h,
                                       width: 70.w,
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20.r),
-                                          border: Border.all(color: Colors.lightBlueAccent)
+                                        borderRadius: BorderRadius.circular(20.r),
+                                        border: Border.all(color: Colors.lightBlueAccent),
                                       ),
-                                      child: TextButton(
-                                          onPressed: (){},
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text('${_hourlyWidgetModel!.temperature[index].round().toString()}\u00B0C'??"__", style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18.sp
-                                              ),),
-                                              Container(
-                                                height: 43.h,
-                                                width: 43.w,
-                                                child: Lottie.asset('assets/animations/light_rain.json'),
-                                              ),
-                                              Text("17:00", style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18.sp
-                                              ),),
-                                            ],
-                                          )
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            '${_hourlyWidgetModel!.temperature[index].round().toString()}\u00B0C' ?? "__",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18.sp,
+                                            ),
+                                          ),
+                                          Container(
+                                            height: 43.h,
+                                            width: 43.w,
+                                            child: Lottie.asset(ClimateAnimation(_hourlyWidgetModel!.condition[index]))
+                                          ),
+                                          Text(
+                                            _hourlyWidgetModel!.time[index].substring(11,16),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18.sp,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    SizedBox(width: 5.w,),
-                                  ],
-                                );
-                              },
-
+                                  );
+                                }),
+                              ),
                             ),
                           )
                         ],
