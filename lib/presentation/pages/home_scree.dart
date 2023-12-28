@@ -47,19 +47,29 @@ class _HomeScreenState extends State<HomeScreen> {
     };
 
     String defaultAnimation = 'sunny';
+    String nightDefaultAnimation = 'night_clear';
 
     if (currentCondition != null) {
       String animationKey = animations[currentCondition] ?? defaultAnimation;
 
       if (isNightTime && !animationKey.contains('night')) {
+        return 'assets/animations/$nightDefaultAnimation.json';
+      }
+
+      if (isNightTime) {
         animationKey = 'night_$animationKey';
       }
 
       return 'assets/animations/$animationKey.json';
     }
 
+    if (isNightTime) {
+      return 'assets/animations/$nightDefaultAnimation.json';
+    }
+
     return 'assets/animations/$defaultAnimation.json';
   }
+
 
   @override
   void initState() {
