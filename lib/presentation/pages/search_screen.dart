@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tiny_sky/data/datasources/remote/location_data.dart';
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -9,6 +10,21 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+
+  Future<void> placeAutoComplete(String query) async {
+    Uri uri= Uri.https("maps.googleapis.com",
+        "maps/api/place/autocomplete/json",
+      {
+        "input":query,
+        "key" : "AIzaSyC6f-pPrWey1Z3ZbU00Q6uK8R5fZNqeVzs",
+      });
+    String? respose = await LocationData.fetchUrl(uri);
+
+    if(respose!=null){
+      print(respose);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +72,35 @@ class _SearchScreenState extends State<SearchScreen> {
                ),
              ),
              SizedBox(height: 10.h,),
-             LocationListTile('Jhansi')
+             Padding(
+               padding: EdgeInsets.symmetric(horizontal: 20),
+               child: Container(
+                 height: 40.h,
+                 width: double.infinity,
+                 decoration: BoxDecoration(
+                   color: Colors.grey.withOpacity(0.2),
+                   borderRadius: BorderRadius.circular(10.r)
+                 ),
+                 child: TextButton(
+                   onPressed: (){
+                     placeAutoComplete("Dubai");
+                   },
+                   child: Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       Icon(CupertinoIcons.location_circle, color: Colors.grey,),
+                       SizedBox(width: 10,),
+                       Text("Use current location", style: TextStyle(
+                         color: Colors.grey
+                       ),),
+                     ],
+                   ),
+                 ),
+               ),
+             ),
+             SizedBox(height: 10.h,),
+             LocationListTile('Jhansi'),
+             LocationListTile('Jhansi'),
            ],
         ),
       ),
@@ -68,7 +112,7 @@ class _SearchScreenState extends State<SearchScreen> {
       height: 40.h,
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.symmetric(horizontal: BorderSide(color: Colors.grey, width: 0.5))
+        border: Border(bottom: BorderSide(color: Colors.grey.withOpacity(0.5,) ,width: 0.5))
       ),
       child: TextButton(
           onPressed: (){},

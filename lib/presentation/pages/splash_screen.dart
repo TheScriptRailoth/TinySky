@@ -107,6 +107,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../data/datasources/remote/hourly_widget_data.dart';
 import '../../data/datasources/remote/weather_data.dart';
@@ -132,10 +133,15 @@ class _SplashScreenState extends State<SplashScreen> {
   final _hourlyWidgetData = HourlyWidgetData('672dd5784d1ee2fff09d6767c38498c7');
   HourlyWidgetModel? _hourlyWidgetModel;
   WeatherModel? _weatherModel;
+  bool showAnimtion=false;
+
 
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration(milliseconds: 300),(){
+      showAnimtion=true;
+    });
     _fetchDataAndNavigate();
   }
 
@@ -185,22 +191,47 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Container(
-                  height: 150.h,
-                  width: 170.w,
-                  child: Image.asset('assets/TinySky_logo.png', fit: BoxFit.cover),
-                ),
-                SizedBox(height: 5.h),
-                Text(
-                  "TinySky",
-                  style: GoogleFonts.adventPro(
-                    color: Colors.white,
-                    fontSize: 30.sp,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 150.h,
+                    width: 170.w,
+                    child: Image.asset('assets/TinySky_logo.png', fit: BoxFit.cover),
                   ),
-                ),
-              ],
+                  SizedBox(height: 5.h),
+                  Text(
+                    "TinySky",
+                    style: GoogleFonts.adventPro(
+                      color: Colors.white,
+                      fontSize: 30.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            showAnimtion?Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("Featching Data", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
+                  Container(
+                    height: 35.h,
+                    width: 35.w,
+                    child: Lottie.asset('assets/animations/loading_animation.json', fit: BoxFit.contain),
+                  )
+                ],
+              ),
+            ):Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              child: Container(
+                height: 35.h,
+                width: 35.w,
+              ),
             ),
           ],
         ),
