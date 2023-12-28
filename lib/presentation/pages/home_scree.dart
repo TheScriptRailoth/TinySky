@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                       height: 187.h,
                       width: 284.w,
-                      child: Lottie.asset(ClimateAnimation(_weatherModel!.condition))
+                      child: Lottie.asset(ClimateAnimation(_weatherModel!.condition), fit: BoxFit.contain)
                   ),
                   Text("${_weatherModel?.temperature.round()}\u00B0C", style: TextStyle(
                       fontWeight: FontWeight.bold,
