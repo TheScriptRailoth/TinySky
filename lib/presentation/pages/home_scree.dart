@@ -20,8 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isNightTime=DateTime.now().hour<6 || DateTime.now().hour>18;
   Color dayColor1 = Color(0xff91DEFF);
   Color dayColor2 = Color(0xff47BBE1);
-  Color nightColor1 = Colors.blueGrey.shade800;
-  Color nightColor2 = Colors.black87;
+  Color nightColor1 = Color(0xff08244F);
+  Color nightColor2 = Color(0xff134CB5);
 
   String monthName(int num){
     List<String> abbreviatedMonths = [
@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: MediaQuery.sizeOf(context).width-40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      color: Color(0xff104084).withOpacity(0.3),
+                      color: isNightTime?Color(0xff001026).withOpacity(0.3):Color(0xff104084).withOpacity(0.3),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -201,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 217.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      color: Color(0xff104084).withOpacity(0.3),
+                      color: isNightTime?Color(0xff001026).withOpacity(0.3):Color(0xff104084).withOpacity(0.3),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
