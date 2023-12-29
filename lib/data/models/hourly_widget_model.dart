@@ -43,7 +43,14 @@ class HourlyWidgetModel{
       double temp=(listData[i]['temp'].toDouble())-273.15;
       String condition= listData[i]['weather'][0]['main'];
 
-      int timestamp = listData2[i]['dt'];;
+      conditionValues.add(condition);
+      timeValue.add(formattedTime);
+      tempValues.add(temp);
+    }
+
+    for(int i=0;i<listData2.length;i++){
+
+      int timestamp = listData2[i]['dt'];
       DateTime dateTime2 = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000, isUtc: true);
       String dayName = DateFormat.E().format(dateTime2);
       double minTemp = (listData2[i]['temp']['min'].toDouble())-273.15;
@@ -55,9 +62,6 @@ class HourlyWidgetModel{
       dayMinTempValues.add(minTemp);
       dayMaxTempValues.add(maxTemp);
 
-      conditionValues.add(condition);
-      timeValue.add(formattedTime);
-      tempValues.add(temp);
     }
 
     return HourlyWidgetModel(

@@ -31,6 +31,27 @@ class _HomeScreenState extends State<HomeScreen> {
     return abbreviatedMonths[num-1];
   }
 
+  String convertToFullDayName(String abbreviatedDay) {
+    switch (abbreviatedDay.toLowerCase()) {
+      case 'mon':
+        return 'Monday';
+      case 'tue':
+        return 'Tuesday';
+      case 'wed':
+        return 'Wednesday';
+      case 'thu':
+        return 'Thursday';
+      case 'fri':
+        return 'Friday';
+      case 'sat':
+        return 'Saturday';
+      case 'sun':
+        return 'Sunday';
+      default:
+        return 'Invalid Day';
+    }
+  }
+
   WeatherModel? _weatherModel;
   HourlyWidgetModel? _hourlyWidgetModel;
 
@@ -207,15 +228,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
                         children: [
+                          SizedBox(height: 5.h,),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Today", style: GoogleFonts.taprom(color: Colors.white, fontSize: 24.sp, fontWeight: FontWeight.w200,),),
+                                Text("Today", style: GoogleFonts.roboto(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.w500,),),
                                 Text(monthName(DateTime.now().month)+', '+ DateTime.now().day.toString(), style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 18.sp
+                                  fontSize: 16.sp
                                 ),)
                               ],
                             ),
@@ -270,7 +292,93 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.h,)
+                  SizedBox(height: 20.h,),
+                  Container(
+                    height: 400.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.r),
+                      color: isNightTime?Color(0xff001026).withOpacity(0.3):Color(0xff104084).withOpacity(0.3),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 5.h,),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Next Forcast", style: GoogleFonts.roboto(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.w500,),),
+                                Icon(CupertinoIcons.calendar, color: Colors.white, size: 20.sp,)
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 15.h,),
+                      Container(
+                        child: Column(
+                          children: List.generate(8, (index) {
+                            return Container(
+                              height: 40.h,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          convertToFullDayName(_hourlyWidgetModel?.dayName[index]?? ""),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      height: 35.h,
+                                      width: 35.w,
+                                      child: Lottie.asset(ClimateAnimation(_hourlyWidgetModel!.dayCondition[index].toString())),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          '${_hourlyWidgetModel?.dayMaxTemp[index]?.round().toString() ?? ""}\u00B0C',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        SizedBox(width: 10.w,),
+                                        Text(
+                                          '${_hourlyWidgetModel?.dayMinTemp[index]?.round().toString() ?? ""}\u00B0C',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                        ),
+                      )
+                      ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20.h,),
                 ],
               ),
             ],
