@@ -13,8 +13,8 @@ class _SearchScreenState extends State<SearchScreen> {
   bool isNightTime=DateTime.now().hour<6 || DateTime.now().hour>18;
   Color dayColor1 = Color(0xff91DEFF);
   Color dayColor2 = Color(0xff47BBE1);
-  Color nightColor1 = Colors.blueGrey.shade800;
-  Color nightColor2 = Colors.black87;
+  Color nightColor1 = Color(0xff08244F);
+  Color nightColor2 = Color(0xff134CB5);
 
   Future<void> placeAutoComplete(String query) async {
     Uri uri= Uri.https("maps.googleapis.com",
@@ -48,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
              children: [
                Container(
                  decoration: BoxDecoration(
-                   border: Border.all(color: Colors.grey, width: 0.5),
+                   border: Border.all(color: Color(0xff104084).withOpacity(0.3), width: 0.7),
                    borderRadius: BorderRadius.circular(10.r),
                  ),
                  width: double.infinity,
@@ -92,7 +92,7 @@ class _SearchScreenState extends State<SearchScreen> {
                    height: 40.h,
                    width: double.infinity,
                    decoration: BoxDecoration(
-                     color: Colors.grey.withOpacity(0.2),
+                     color: Color(0xff104084).withOpacity(0.8),
                      borderRadius: BorderRadius.circular(10.r)
                    ),
                    child: TextButton(
@@ -102,10 +102,10 @@ class _SearchScreenState extends State<SearchScreen> {
                      child: Row(
                        mainAxisAlignment: MainAxisAlignment.center,
                        children: [
-                         Icon(CupertinoIcons.location_circle, color: Colors.grey,),
+                         Icon(CupertinoIcons.location_circle, color: Colors.white,),
                          SizedBox(width: 10,),
                          Text("Use current location", style: TextStyle(
-                           color: Colors.grey
+                           color: Colors.white,
                          ),),
                        ],
                      ),

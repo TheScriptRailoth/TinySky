@@ -4,12 +4,11 @@ import 'package:geolocator/geolocator.dart';
 import '../../models/hourly_widget_model.dart';
 class HourlyWidgetData{
   static const url="https://api.openweathermap.org/data/2.5/weather";
-  final String apiKey;
 
-  HourlyWidgetData(this.apiKey);
+  HourlyWidgetData();
   Future<HourlyWidgetModel>getHourlyData() async{
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    final response2= await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/forecast?lat=${position.latitude}&lon=${position.longitude}&exclude=hourly&appid=$apiKey&units=metric'));
+    final response2= await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/onecall?lat=${position.latitude}&lon=${position.longitude}&exclude=daily,minutely,currently,current&appid=105d997a8a1977cb138167503eb7afa1'));
     if(response2.statusCode==200){
       print("Respose 2: ${response2.body}");
       return HourlyWidgetModel.fromJson(jsonDecode(response2.body));

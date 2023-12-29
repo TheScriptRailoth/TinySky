@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
           child: ListView(
             children: [
               Row(
@@ -269,7 +269,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(height: 20.h,)
                 ],
               ),
             ],
