@@ -121,14 +121,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             return SearchScreen();
                           }));
                         },
-                        child: Text(_weatherModel?.city??"Loading City...", style: GoogleFonts.roboto(
-                          fontSize: 18.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                        ), ),
-                      ),
-                      SizedBox(width: 5.w,),
-                      Icon(Icons.arrow_drop_down_rounded, color: Colors.white,size: 24.h,)
+                        child: Row(
+                          children: [
+                            Text(_weatherModel?.city??"Loading City...", style: GoogleFonts.roboto(
+                              fontSize: 18.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                            ), ),
+                            SizedBox(width: 5.w,),
+                            Icon(Icons.arrow_drop_down_rounded, color: Colors.white,size: 24.h,),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ],
@@ -200,18 +204,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Color(0xff104084).withOpacity(0.3),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Today", style: GoogleFonts.taprom(color: Colors.white, fontSize: 24.sp, fontWeight: FontWeight.w200,),),
-                              Text(monthName(DateTime.now().month)+', '+ DateTime.now().day.toString(), style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.sp
-                              ),)
-                            ],
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Today", style: GoogleFonts.taprom(color: Colors.white, fontSize: 24.sp, fontWeight: FontWeight.w200,),),
+                                Text(monthName(DateTime.now().month)+', '+ DateTime.now().day.toString(), style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.sp
+                                ),)
+                              ],
+                            ),
                           ),
                           SizedBox(height: 15.h,),
                           Container(
