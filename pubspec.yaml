@@ -37,6 +37,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   google_fonts:
   intl:
+  connectivity :
 
 
 

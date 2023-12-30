@@ -1,14 +1,18 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiny_sky/presentation/pages/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ConnectivityProvider _connectivityProvider = ConnectivityProvider();
+  MyApp({Key? key}):super(key: key){
+    _connectivityProvider.checkConnectivity();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +28,36 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff254659)),
               useMaterial3: true,
             ),
-            home: SplashScreen()
+            home: _connectivityProvider.isConnected?SplashScreen():NoInternetScreen(),
         );
       },
+    );
+  }
+}
+
+class ConnectivityProvider extends ChangeNotifier {
+  bool _isConnected = true;
+
+  bool get isConnected => _isConnected;
+
+  Future<void> checkConnectivity() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      _isConnected = false;
+    } else {
+      _isConnected = true;
+    }
+    notifyListeners();
+  }
+}
+
+class NoInternetScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('No Internet Connection!'),
+      ),
     );
   }
 }

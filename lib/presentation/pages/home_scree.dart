@@ -315,7 +315,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           SizedBox(height: 15.h,),
-                      Container(
+                          Container(
                         child: Column(
                           children: List.generate(8, (index) {
                             return Container(
@@ -326,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           convertToFullDayName(_hourlyWidgetModel?.dayName[index]?? ""),
@@ -374,7 +374,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           }),
                         ),
                       )
-                      ],
+                        ],
                       ),
                     ),
                   ),
