@@ -123,6 +123,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool hasInternet = true;
   bool isNightTime = DateTime.now().hour < 6 || DateTime.now().hour > 18;
   Color dayColor1 = Color(0xff91DEFF);
   Color dayColor2 = Color(0xff47BBE1);
@@ -143,6 +144,8 @@ class _SplashScreenState extends State<SplashScreen> {
     });
     _fetchDataAndNavigate();
   }
+
+
 
   Future<void> _fetchDataAndNavigate() async {
     try {
@@ -168,6 +171,9 @@ class _SplashScreenState extends State<SplashScreen> {
       );
     } catch (e) {
       print(e);
+      setState(() {
+        hasInternet=false;
+      });
     }
   }
 
@@ -198,12 +204,11 @@ class _SplashScreenState extends State<SplashScreen> {
                   Container(
                     height: 150.h,
                     width: 170.w,
-                    child: Image.asset('assets/TinySky_logo.png', fit: BoxFit.cover),
+                    child: hasInternet?Image.asset('assets/TinySky_logo.png', fit: BoxFit.cover):Lottie.asset('assets/animations/no_internet.json', fit: BoxFit.contain),
                   ),
                   SizedBox(height: 5.h),
                   Text(
-                    "TinySky",
-                    style: GoogleFonts.adventPro(
+                    hasInternet?"TinySky":"No Internet!",style: GoogleFonts.adventPro(
                       color: Colors.white,
                       fontSize: 30.sp,
                     ),
@@ -213,7 +218,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             showAnimtion?Padding(
               padding: EdgeInsets.symmetric(vertical: 20.h),
-              child: Row(
+              child: hasInternet?Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -222,6 +227,16 @@ class _SplashScreenState extends State<SplashScreen> {
                     height: 35.h,
                     width: 35.w,
                     child: Lottie.asset('assets/animations/loading_animation.json', fit: BoxFit.contain),
+                  )
+                ],
+              ):Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
+                  Container(
+                    height: 35.h,
+                    width: 35.w,
                   )
                 ],
               ),

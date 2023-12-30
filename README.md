@@ -7,7 +7,7 @@ TinySky is a weather application that provides accurate weather forecasts based 
 <p align="center">
   <img src="assets/screenshots/ss1.jpg" alt="Screenshot 1" width="200" hspace="10"/>
   <img src="assets/screenshots/ss2.jpg" alt="Screenshot 2" width="200" hspace="10"/>
-  <img src="assets/screenshots/ss5.jpg" alt="Screenshot 3" width="200" hspace="10"/>
+  <img src="assets/screenshots/ss3.jpg" alt="Screenshot 3" width="200" hspace="10"/>
   <img src="assets/screenshots/ss4.jpg" alt="Screenshot 4" width="200" hspace="10"/>
 </p>
 

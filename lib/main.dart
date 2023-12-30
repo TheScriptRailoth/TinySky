@@ -9,10 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final ConnectivityProvider _connectivityProvider = ConnectivityProvider();
-  MyApp({Key? key}):super(key: key){
-    _connectivityProvider.checkConnectivity();
-  }
+  MyApp({Key? key}):super(key: key){}
 
   @override
   Widget build(BuildContext context) {
@@ -28,36 +25,9 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff254659)),
               useMaterial3: true,
             ),
-            home: _connectivityProvider.isConnected?SplashScreen():NoInternetScreen(),
+            home: SplashScreen(),
         );
       },
-    );
-  }
-}
-
-class ConnectivityProvider extends ChangeNotifier {
-  bool _isConnected = true;
-
-  bool get isConnected => _isConnected;
-
-  Future<void> checkConnectivity() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult == ConnectivityResult.none) {
-      _isConnected = false;
-    } else {
-      _isConnected = true;
-    }
-    notifyListeners();
-  }
-}
-
-class NoInternetScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('No Internet Connection!'),
-      ),
     );
   }
 }
