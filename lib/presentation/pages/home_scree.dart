@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:tiny_sky/data/datasources/remote/hourly_widget_data.dart';
 import 'package:tiny_sky/data/models/hourly_widget_model.dart';
 import 'package:tiny_sky/data/models/weather_model.dart';
 import 'package:tiny_sky/presentation/pages/search_screen.dart';
@@ -17,11 +16,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isNightTime=DateTime.now().hour<6 || DateTime.now().hour>18;
-  Color dayColor1 = Color(0xff91DEFF);
-  Color dayColor2 = Color(0xff47BBE1);
-  Color nightColor1 = Color(0xff08244F);
-  Color nightColor2 = Color(0xff134CB5);
+
+  Color dayColor1 = const Color(0xff91DEFF);
+  Color dayColor2 = const Color(0xff47BBE1);
+  Color nightColor1 = const Color(0xff08244F);
+  Color nightColor2 = const Color(0xff134CB5);
 
   String monthName(int num){
     List<String> abbreviatedMonths = [
@@ -55,42 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
   WeatherModel? _weatherModel;
   HourlyWidgetModel? _hourlyWidgetModel;
 
-  String ClimateAnimation(String currentCondtion) {
-    String? currentCondition = currentCondtion.toLowerCase();
-
-    final Map<String, String> animations = {
-      'clouds': 'clouds',
-      'mist': 'clouds',
-      'smoke': 'clouds',
-      'haze': 'clouds',
-      'dust': 'clouds',
-      'fog': 'clouds',
-      'cloud': 'night_cloud',
-    };
-
-    String defaultAnimation = 'sunny';
-    String nightDefaultAnimation = 'night_clear';
-
-    if (currentCondition != null) {
-      String animationKey = animations[currentCondition] ?? defaultAnimation;
-
-      if (isNightTime && !animationKey.contains('night')) {
-        return 'assets/animations/$nightDefaultAnimation.json';
-      }
-
-      if (isNightTime) {
-        animationKey = 'night_$animationKey';
-      }
-
-      return 'assets/animations/$animationKey.json';
-    }
-
-    if (isNightTime) {
-      return 'assets/animations/$nightDefaultAnimation.json';
-    }
-
-    return 'assets/animations/$defaultAnimation.json';
-  }
 
 
   @override
@@ -102,11 +65,52 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
+
+    Brightness systemBrightness= MediaQuery.of(context).platformBrightness;
+    bool isNightTime=  systemBrightness == Brightness.dark?true:false;
     List<Color> colors = isNightTime ? [nightColor1, nightColor2] : [dayColor1, dayColor2];
 
     if (_weatherModel == null) {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     }
+
+    String ClimateAnimation(String currentCondtion) {
+      String? currentCondition = currentCondtion.toLowerCase();
+
+      final Map<String, String> animations = {
+        'clouds': 'clouds',
+        'mist': 'clouds',
+        'smoke': 'clouds',
+        'haze': 'clouds',
+        'dust': 'clouds',
+        'fog': 'clouds',
+        'cloud': 'night_cloud',
+      };
+
+      String defaultAnimation = 'sunny';
+      String nightDefaultAnimation = 'night_clear';
+
+      if (currentCondition != null) {
+        String animationKey = animations[currentCondition] ?? defaultAnimation;
+
+        if (isNightTime && !animationKey.contains('night')) {
+          return 'assets/animations/$nightDefaultAnimation.json';
+        }
+
+        if (isNightTime) {
+          animationKey = 'night_$animationKey';
+        }
+
+        return 'assets/animations/$animationKey.json';
+      }
+
+      if (isNightTime) {
+        return 'assets/animations/$nightDefaultAnimation.json';
+      }
+
+      return 'assets/animations/$defaultAnimation.json';
+    }
+
 
     return Scaffold(
       backgroundColor: Color(0xff91DEFF),
@@ -180,16 +184,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: MediaQuery.sizeOf(context).width-40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      color: isNightTime?Color(0xff001026).withOpacity(0.3):Color(0xff104084).withOpacity(0.3),
+                      color: isNightTime?const Color(0xff001026).withOpacity(0.3):const Color(0xff104084).withOpacity(0.3),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.water_rounded, color: Colors.white, size: 18,),
+                            const Icon(Icons.water_rounded, color: Colors.white, size: 18,),
                             SizedBox(width: 5.w,),
-                            Text((_weatherModel!.humidity.round().toString()??"__")+"%", style: TextStyle(
+                            Text("${_weatherModel!.humidity.round().toString()??"__"}%", style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16
                             ),)
@@ -197,8 +201,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Row(
                           children: [
-                            Icon(CupertinoIcons.thermometer, color: Colors.white, size: 18,),
-                            Text("${_weatherModel?.feelsLike.round().toString()??"__"}\u00B0C", style: TextStyle(
+                            const Icon(CupertinoIcons.thermometer, color: Colors.white, size: 18,),
+                            Text("${_weatherModel?.feelsLike.round().toString()??"__"}\u00B0C", style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16
                             ),)
@@ -206,9 +210,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Row(
                           children: [
-                            Icon(CupertinoIcons.wind, color: Colors.white, size: 18,),
+                            const Icon(CupertinoIcons.wind, color: Colors.white, size: 18,),
                             SizedBox(width: 5.w),
-                            Text("${_weatherModel?.windSpeed.round().toString()??"__"}km/h", style: TextStyle(
+                            Text("${_weatherModel?.windSpeed.round().toString()??"__"}km/h", style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18
                             ),)
@@ -222,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 217.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      color: isNightTime?Color(0xff001026).withOpacity(0.3):Color(0xff104084).withOpacity(0.3),
+                      color: isNightTime?const Color(0xff001026).withOpacity(0.3):const Color(0xff104084).withOpacity(0.3),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -230,12 +234,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           SizedBox(height: 5.h,),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text("Today", style: GoogleFonts.roboto(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.w500,),),
-                                Text(monthName(DateTime.now().month)+', '+ DateTime.now().day.toString(), style: TextStyle(
+                                Text('${monthName(DateTime.now().month)}, ${DateTime.now().day}', style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16.sp
                                 ),)
@@ -268,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               fontSize: 18.sp,
                                             ),
                                           ),
-                                          Container(
+                                          SizedBox(
                                             height: 43.h,
                                             width: 43.w,
                                             child: Lottie.asset(ClimateAnimation(_hourlyWidgetModel!.condition[index]))
@@ -330,7 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         Text(
                                           convertToFullDayName(_hourlyWidgetModel?.dayName[index]?? ""),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18,
@@ -350,8 +354,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          '${_hourlyWidgetModel?.dayMaxTemp[index]?.round().toString() ?? ""}\u00B0C',
-                                          style: TextStyle(
+                                          '${_hourlyWidgetModel?.dayMaxTemp[index].round().toString() ?? ""}\u00B0C',
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18,
@@ -360,7 +364,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         SizedBox(width: 10.w,),
                                         Text(
                                           '${_hourlyWidgetModel?.dayMinTemp[index]?.round().toString() ?? ""}\u00B0C',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 14,
                                           ),

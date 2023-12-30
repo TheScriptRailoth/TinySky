@@ -10,7 +10,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  bool isNightTime=DateTime.now().hour<6 || DateTime.now().hour>18;
+
   Color dayColor1 = Color(0xff91DEFF);
   Color dayColor2 = Color(0xff47BBE1);
   Color nightColor1 = Color(0xff08244F);
@@ -32,6 +32,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Brightness systemBrightness = MediaQuery.of(context).platformBrightness;
+    bool isNightTime= systemBrightness==Brightness.dark?true:false;
     List<Color> colors = isNightTime ? [nightColor1, nightColor2] : [dayColor1, dayColor2];
     return Scaffold(
       body: Container(
