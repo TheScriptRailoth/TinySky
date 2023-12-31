@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tiny_sky/data/datasources/remote/location_data.dart';
+import 'package:tiny_sky/presentation/pages/search_result_screen.dart';
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -16,22 +17,23 @@ class _SearchScreenState extends State<SearchScreen> {
   Color nightColor1 = Color(0xff08244F);
   Color nightColor2 = Color(0xff134CB5);
 
-  Future<void> placeAutoComplete(String query) async {
-    Uri uri= Uri.https("maps.googleapis.com",
-        "maps/api/place/autocomplete/json",
-      {
-        "input":query,
-        "key" : "AIzaSyC6f-pPrWey1Z3ZbU00Q6uK8R5fZNqeVzs",
-      });
-    String? respose = await LocationData.fetchUrl(uri);
-
-    if(respose!=null){
-      print(respose);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+
+    TextEditingController _cityName= TextEditingController();
+
+    void initState(){
+      super.initState();
+      _cityName=TextEditingController();
+    }
+
+    void dispose(){
+      _cityName.dispose();
+      super.dispose();
+    }
+
+
     Brightness systemBrightness = MediaQuery.of(context).platformBrightness;
     bool isNightTime= systemBrightness==Brightness.dark?true:false;
     List<Color> colors = isNightTime ? [nightColor1, nightColor2] : [dayColor1, dayColor2];
@@ -50,7 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
              children: [
                Container(
                  decoration: BoxDecoration(
-                   border: Border.all(color: Color(0xff104084).withOpacity(0.3), width: 0.7),
+                   border: Border.all(color: Colors.white, width: 0.7),
                    borderRadius: BorderRadius.circular(10.r),
                  ),
                  width: double.infinity,
@@ -58,21 +60,16 @@ class _SearchScreenState extends State<SearchScreen> {
                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                    child: Row(
                      children: [
-                       Container(
-                         height: 50.h,
-                         width: 40.w,
-                         alignment: Alignment.center,
-                         child: Center(child: Icon(CupertinoIcons.search)),
-                       ),
                        Expanded(
                          child: TextFormField(
-                           decoration: InputDecoration(
+                           controller: _cityName,
+                           decoration: const InputDecoration(
                              border: InputBorder.none,
                              hintText: 'Search',
-                             hintStyle: TextStyle(color: Colors.grey),
+                             hintStyle: TextStyle(color: Colors.white),
                            ),
                            style: TextStyle(
-                             color: Colors.black,
+                             color: Colors.white,
                              fontSize: 18.sp,
                            ),
                          ),
@@ -81,7 +78,15 @@ class _SearchScreenState extends State<SearchScreen> {
                          height: 50.h,
                          width: 40.w,
                          alignment: Alignment.center,
-                         child: Center(child: Icon(CupertinoIcons.mic_fill)),
+                         child: Center(
+                           child: IconButton(
+                             onPressed: (){
+                               Navigator.push(context, MaterialPageRoute(builder: (context){
+                                 return SearchResultScreen(cityName: _cityName.text);
+                               }));
+                             },
+                             icon: Icon(CupertinoIcons.search, color: Colors.white,)),
+                         )
                        ),
                      ],
                    ),
@@ -99,7 +104,6 @@ class _SearchScreenState extends State<SearchScreen> {
                    ),
                    child: TextButton(
                      onPressed: (){
-                       placeAutoComplete("Dubai");
                      },
                      child: Row(
                        mainAxisAlignment: MainAxisAlignment.center,
