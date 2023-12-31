@@ -32,6 +32,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   Color nightColor1 = const Color(0xff08244F);
   Color nightColor2 = const Color(0xff134CB5);
 
+  bool isInvalid=false;
+
   String monthName(int num){
     List<String> abbreviatedMonths = [
       'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
@@ -67,6 +69,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     super.initState();
     _fetchDataAndNavigate();
   }
+
   Future<void> _fetchDataAndNavigate() async {
     try {
       final weather = await _weatherData.getWeatherData(widget.cityName);
@@ -78,6 +81,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       });
     } catch (e) {
       print('Error fetching weather data for ${widget.cityName} $e');
+      setState(() {
+        isInvalid=true;
+      });
     }
   }
 
@@ -100,7 +106,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               )
           ),
           child: Center(
-            child: Row(
+            child: isInvalid? :Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -332,7 +338,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     height: 400.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      color: isNightTime?Color(0xff001026).withOpacity(0.3):Color(0xff104084).withOpacity(0.3),
+                      color: isNightTime?const Color(0xff001026).withOpacity(0.3):const Color(0xff104084).withOpacity(0.3),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -340,7 +346,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         children: [
                           SizedBox(height: 5.h,),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
