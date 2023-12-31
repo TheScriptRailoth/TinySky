@@ -97,51 +97,16 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
     if (_weatherModel == null) {
       if (isInvalid) {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
-          if (Navigator.canPop(context)) {
-            Navigator.pop(context);
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Invalid city name'),
-              ),
-            );
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => SearchScreen()),
-            );
-          }
-        });
-
-        return Scaffold(
-          backgroundColor: Color(0xff91DEFF),
-          body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: colors,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Fetching Data",
-                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                    height: 35.h,
-                    width: 35.w,
-                    child: Lottie.asset('assets/animations/loading_animation.json', fit: BoxFit.contain),
-                  )
-                ],
-              ),
-            ),
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Invalid city name'),
           ),
         );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => SearchScreen()),
+        );
+        return SizedBox();
       }
       else {
         return Scaffold(
