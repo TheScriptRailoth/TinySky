@@ -101,6 +101,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           if (Navigator.canPop(context)) {
             Navigator.pop(context);
           } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Invalid city name'),
+              ),
+            );
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => SearchScreen()),
