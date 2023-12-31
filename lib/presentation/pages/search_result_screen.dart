@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tiny_sky/presentation/pages/search_screen.dart';
+import 'package:toast/toast.dart';
 
 import '../../data/datasources/remote/hourly_widget_data.dart';
 import '../../data/datasources/remote/weather_data.dart';
@@ -95,33 +96,81 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     List<Color> colors = isNightTime ? [nightColor1, nightColor2] : [dayColor1, dayColor2];
 
     if (_weatherModel == null) {
-      return Scaffold(
-        backgroundColor: Color(0xff91DEFF),
-        body: Container(
-          decoration: BoxDecoration(
+      if (isInvalid) {
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => SearchScreen()),
+            );
+          }
+        });
+
+        return Scaffold(
+          backgroundColor: Color(0xff91DEFF),
+          body: Container(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: colors,
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-              )
-          ),
-          child: Center(
-            child: isInvalid? :Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("Featching Data", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
-                Container(
-                  height: 35.h,
-                  width: 35.w,
-                  child: Lottie.asset('assets/animations/loading_animation.json', fit: BoxFit.contain),
-                )
-              ],
+              ),
+            ),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Fetching Data",
+                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    height: 35.h,
+                    width: 35.w,
+                    child: Lottie.asset('assets/animations/loading_animation.json', fit: BoxFit.contain),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
+      }
+      else {
+        return Scaffold(
+          backgroundColor: Color(0xff91DEFF),
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: colors,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Fetching Data",
+                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    height: 35.h,
+                    width: 35.w,
+                    child: Lottie.asset('assets/animations/loading_animation.json', fit: BoxFit.contain),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      }
     }
+
 
     String ClimateAnimation(String currentCondtion) {
       String? currentCondition = currentCondtion.toLowerCase();

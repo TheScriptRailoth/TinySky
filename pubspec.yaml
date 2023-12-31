@@ -38,6 +38,7 @@ dependencies:
   google_fonts:
   intl:
   connectivity :
+  toast:
 
 
 
