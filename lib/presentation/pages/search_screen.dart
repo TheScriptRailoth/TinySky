@@ -136,7 +136,11 @@ class _SearchScreenState extends State<SearchScreen> {
         border: Border(bottom: BorderSide(color: Colors.grey.withOpacity(0.5,) ,width: 0.5))
       ),
       child: TextButton(
-          onPressed: (){},
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              return SearchResultScreen(cityName: location);
+            }));
+          },
           child: Row(
             children: [
               Container(
