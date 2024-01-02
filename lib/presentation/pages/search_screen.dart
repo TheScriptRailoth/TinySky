@@ -120,7 +120,10 @@ class _SearchScreenState extends State<SearchScreen> {
                ),
                SizedBox(height: 10.h,),
                LocationListTile('Jhansi'),
-               LocationListTile('Jhansi'),
+               LocationListTile('Delhi'),
+               LocationListTile('Mumbai'),
+               LocationListTile('Gwalior'),
+               LocationListTile('Talbehat'),
              ],
           ),
         ),
@@ -154,7 +157,7 @@ class _SearchScreenState extends State<SearchScreen> {
               Container(
                 width: 40.w,
                 height: 30.h,
-                child: Icon(CupertinoIcons.arrow_up_left, color: Colors.grey,),
+                child: Icon(Icons.trending_up, color: Colors.grey,),
               ),
             ],
           )
