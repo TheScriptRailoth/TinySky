@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tiny_sky/data/datasources/remote/location_data.dart';
 import 'package:tiny_sky/presentation/pages/search_result_screen.dart';
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -12,10 +11,10 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
 
-  Color dayColor1 = Color(0xff91DEFF);
-  Color dayColor2 = Color(0xff47BBE1);
-  Color nightColor1 = Color(0xff08244F);
-  Color nightColor2 = Color(0xff134CB5);
+  Color dayColor1 = const Color(0xff91DEFF);
+  Color dayColor2 = const Color(0xff47BBE1);
+  Color nightColor1 = const Color(0xff08244F);
+  Color nightColor2 = const Color(0xff134CB5);
 
 
   @override
@@ -47,7 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
             )
         ),
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: ListView(
              children: [
                Container(
@@ -65,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
                            controller: _cityName,
                            decoration: const InputDecoration(
                              border: InputBorder.none,
-                             hintText: 'Search',
+                             hintText: 'Search City...',
                              hintStyle: TextStyle(color: Colors.white),
                            ),
                            style: TextStyle(
@@ -157,7 +156,7 @@ class _SearchScreenState extends State<SearchScreen> {
               Container(
                 width: 40.w,
                 height: 30.h,
-                child: Icon(Icons.trending_up, color: Colors.grey,),
+                child: const Icon(Icons.trending_up, color: Colors.grey,),
               ),
             ],
           )

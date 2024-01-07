@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tiny_sky/presentation/pages/search_screen.dart';
-import 'package:toast/toast.dart';
-
 import '../../data/datasources/remote/hourly_widget_data.dart';
 import '../../data/datasources/remote/weather_data.dart';
 import '../../data/models/hourly_widget_model.dart';
@@ -17,8 +15,6 @@ class SearchResultScreen extends StatefulWidget {
 
   @override
   State<SearchResultScreen> createState() => _SearchResultScreenState();
-
-
 }
 
 class _SearchResultScreenState extends State<SearchResultScreen> {
@@ -97,11 +93,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
     if (_weatherModel == null) {
       if (isInvalid) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Invalid city name'),
-          ),
-        );
+
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => SearchScreen()),
@@ -124,7 +117,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Fetching Data",
                     style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
@@ -180,7 +173,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     }
 
     return Scaffold(
-      backgroundColor: Color(0xff91DEFF),
+      backgroundColor: const Color(0xff91DEFF),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
