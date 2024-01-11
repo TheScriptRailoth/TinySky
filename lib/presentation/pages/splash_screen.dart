@@ -19,10 +19,10 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool hasInternet = true;
-  Color dayColor1 = Color(0xff91DEFF);
-  Color dayColor2 = Color(0xff47BBE1);
-  Color nightColor1 = Color(0xff08244F);
-  Color nightColor2 = Color(0xff134CB5);
+  Color dayColor1 = const Color(0xff91DEFF);
+  Color dayColor2 = const Color(0xff47BBE1);
+  Color nightColor1 = const Color(0xff08244F);
+  Color nightColor2 = const Color(0xff134CB5);
 
   final _weatherData = WeatherData('672dd5784d1ee2fff09d6767c38498c7');
   final _hourlyWidgetData = HourlyWidgetData();
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 300),(){
+    Future.delayed(const Duration(milliseconds: 300),(){
       showAnimtion=true;
     });
     _fetchDataAndNavigate();
@@ -120,7 +120,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("Featching Data", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
+                  const Text("Featching Data", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
                   Container(
                     height: 35.h,
                     width: 35.w,
