@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
     return Scaffold(
-      backgroundColor: Color(0xff91DEFF),
+      backgroundColor: const Color(0xff91DEFF),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -138,12 +138,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.location_on_outlined, size: 27, color: Colors.white,),
+                      const Icon(Icons.location_on_outlined, size: 27, color: Colors.white,),
                       SizedBox(width: 5.w,),
                       TextButton(
                         onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return SearchScreen();
+                            return const SearchScreen();
                           }));
                         },
                         child: Row(

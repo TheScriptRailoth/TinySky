@@ -99,11 +99,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           context,
           MaterialPageRoute(builder: (context) => SearchScreen()),
         );
-        return SizedBox();
+        return const SizedBox();
       }
       else {
         return Scaffold(
-          backgroundColor: Color(0xff91DEFF),
+          backgroundColor: const Color(0xff91DEFF),
           body: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -191,7 +191,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.location_on_outlined, size: 27, color: Colors.white,),
+                      const Icon(Icons.location_on_outlined, size: 27, color: Colors.white,),
                       SizedBox(width: 5.w,),
                       Row(
                         children: [
@@ -207,7 +207,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                   ),
                   IconButton(
                       onPressed: (){},
-                      icon: Icon(CupertinoIcons.xmark_circle_fill, size: 32, color: Colors.white,)
+                      icon: const Icon(CupertinoIcons.xmark_circle_fill, size: 32, color: Colors.white,)
                   ),
                 ],
               ),
