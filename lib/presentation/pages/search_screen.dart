@@ -84,7 +84,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                  return SearchResultScreen(cityName: _cityName.text);
                                }));
                              },
-                             icon: Icon(CupertinoIcons.search, color: Colors.white,)),
+                             icon: const Icon(CupertinoIcons.search, color: Colors.white,)),
                          )
                        ),
                      ],
@@ -93,7 +93,7 @@ class _SearchScreenState extends State<SearchScreen> {
                ),
                SizedBox(height: 10.h,),
                Padding(
-                 padding: EdgeInsets.symmetric(horizontal: 20),
+                 padding: const EdgeInsets.symmetric(horizontal: 20),
                  child: Container(
                    height: 40.h,
                    width: double.infinity,
@@ -104,7 +104,7 @@ class _SearchScreenState extends State<SearchScreen> {
                    child: TextButton(
                      onPressed: (){
                      },
-                     child: Row(
+                     child: const Row(
                        mainAxisAlignment: MainAxisAlignment.center,
                        children: [
                          Icon(CupertinoIcons.location_circle, color: Colors.white,),
