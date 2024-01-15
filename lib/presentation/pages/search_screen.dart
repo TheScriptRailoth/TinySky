@@ -98,7 +98,7 @@ class _SearchScreenState extends State<SearchScreen> {
                    height: 40.h,
                    width: double.infinity,
                    decoration: BoxDecoration(
-                     color: Color(0xff104084).withOpacity(0.8),
+                     color: const Color(0xff104084).withOpacity(0.8),
                      borderRadius: BorderRadius.circular(10.r)
                    ),
                    child: TextButton(
