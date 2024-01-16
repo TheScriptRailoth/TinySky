@@ -301,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 400.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      color: isNightTime?Color(0xff001026).withOpacity(0.3):Color(0xff104084).withOpacity(0.3),
+                      color: isNightTime?const Color(0xff001026).withOpacity(0.3):Color(0xff104084).withOpacity(0.3),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -309,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           SizedBox(height: 5.h,),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -322,7 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Container(
                         child: Column(
                           children: List.generate(8, (index) {
-                            return Container(
+                            return SizedBox(
                               height: 40.h,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
