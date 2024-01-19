@@ -121,7 +121,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text("Featching Data", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
-                  Container(
+                  SizedBox(
                     height: 35.h,
                     width: 35.w,
                     child: Lottie.asset('assets/animations/loading_animation.json', fit: BoxFit.contain),
@@ -131,8 +131,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
-                  Container(
+                  const Text("", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
+                  SizedBox(
                     height: 35.h,
                     width: 35.w,
                   )
